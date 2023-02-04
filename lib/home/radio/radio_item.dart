@@ -10,15 +10,15 @@ class RadioItem extends StatefulWidget {
   ItemScrollController itemScrollController;
   int itemIndex;
   bool lastItem;
+  AudioPlayer audioPlayer;
 
-  RadioItem({required this.radio, required this.itemScrollController, required this.itemIndex, required this.lastItem});
+  RadioItem({required this.radio, required this.itemScrollController, required this.itemIndex, required this.lastItem, required this.audioPlayer});
 
   @override
   State<RadioItem> createState() => _RadioItemState();
 }
 
 class _RadioItemState extends State<RadioItem> {
-  var audioPlayer = AudioPlayer();
   bool playing = false;
   bool loading = false;
 
@@ -98,10 +98,10 @@ class _RadioItemState extends State<RadioItem> {
 
   Future<void> play() async {
     //assetSource used to play mp3 files from saved files
-    await audioPlayer.play(UrlSource(widget.radio!.url!));
+    await widget.audioPlayer.play(UrlSource(widget.radio!.url!));
   }
 
   Future<void> pause() async {
-    audioPlayer.pause();
+    widget.audioPlayer.pause();
   }
 }

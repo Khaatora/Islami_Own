@@ -5,10 +5,16 @@ import 'package:islami_own/network/remote/api_manager.dart';
 import 'package:islami_own/providers/my_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class RadioTab extends StatelessWidget {
+class RadioTab extends StatefulWidget {
+  @override
+  State<RadioTab> createState() => _RadioTabState();
+}
+
+class _RadioTabState extends State<RadioTab> {
   final ItemScrollController itemScrollController = ItemScrollController();
-
+  var audioPlayer = AudioPlayer();
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     MyProvider provider = Provider.of(context);
@@ -43,7 +49,8 @@ class RadioTab extends StatelessWidget {
                         radio: radios[index],
                         itemScrollController: itemScrollController,
                         itemIndex: index,
-                        lastItem: (index == radios.length - 1 ? true : false)),
+                        lastItem: (index == radios.length - 1 ? true : false),
+                    audioPlayer: audioPlayer),
                   ),
                   itemCount: radios.length,
                 ),
